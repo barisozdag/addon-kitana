@@ -2,9 +2,14 @@ ARG BUILD_FROM=pannal/kitana:0.4.3-1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
-ARG BUILD_ARCH=amd64
+# Copy root filesystem
+COPY rootfs /
 
-# hadolint ignore=DL3008
+# Set shell
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]
+
+ARG BUILD_ARCH=aarch64
+
 RUN \
     set -o pipefail \
     \
@@ -27,9 +32,6 @@ RUN \
     && apk del --no-cache --purge .build-dependencies \
     && rm -f -r \
         /tmp/*
-
-# Copy root filesystem
-COPY rootfs /
 
 # Build arguments
 ARG BUILD_ARCH
