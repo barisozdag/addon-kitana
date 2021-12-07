@@ -20,7 +20,7 @@ RUN \
         curl=7.80.0-r0 \
     \
     && curl -J -L -o /tmp/bashio.tar.gz \
-        "https://github.com/hassio-addons/bashio/archive/v0.13.0.tar.gz" \
+        "https://github.com/hassio-addons/bashio/archive/v0.14.3.tar.gz" \
     && mkdir /tmp/bashio \
     && tar zxvf \
         /tmp/bashio.tar.gz \
