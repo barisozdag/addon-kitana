@@ -1,4 +1,4 @@
-ARG BUILD_FROM=pannal/kitana:0.4.2
+ARG BUILD_FROM=pannal/kitana:0.4.3-1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -6,9 +6,15 @@ ARG BUILD_ARCH=amd64
 
 # hadolint ignore=DL3008
 RUN \
-    apt-get update && apt-get install -y --no-install-recommends \
-    curl && \
-    curl -J -L -o /tmp/bashio.tar.gz \
+    set -o pipefail \
+    \
+    && apk add --no-cache --virtual .build-dependencies \
+        tar=1.34-r0 \
+    \
+    && apk add --no-cache \
+        curl=7.80.0-r0 \
+    \
+    && curl -J -L -o /tmp/bashio.tar.gz \
         "https://github.com/hassio-addons/bashio/archive/v0.13.0.tar.gz" \
     && mkdir /tmp/bashio \
     && tar zxvf \
@@ -17,13 +23,10 @@ RUN \
     \
     && mv /tmp/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
-    && apt-get -y remove --purge curl \
-    && apt-get -y autoremove \
-    && apt-get -y clean \
     \
-    && rm -fr \
-        /tmp/* \
-        /var/lib/apt/lists/*
+    && apk del --no-cache --purge .build-dependencies \
+    && rm -f -r \
+        /tmp/*
 
 # Copy root filesystem
 COPY rootfs /
