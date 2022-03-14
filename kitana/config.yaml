@@ -4,6 +4,7 @@ version: dev
 slug: kitana
 description: A responsive Plex plugin web frontend
 url: https://github.com/barisozdag/addon-kitana
+codenotary: baris@ozdag.net
 arch:
   - armv7
   - aarch64
