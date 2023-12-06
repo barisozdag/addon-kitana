@@ -14,7 +14,7 @@ RUN \
     set -o pipefail \
     \
     && apk add --no-cache --virtual .build-dependencies \
-        tar=1.34-r1 \
+        tar=1.34-r2 \
     \
     && apk add --no-cache \
         curl=8.4.0-r0 \
