@@ -1,4 +1,4 @@
-ARG BUILD_FROM=pannal/kitana:0.4.3-1
+ARG BUILD_FROM=pannal/kitana:0.4.3-2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -14,10 +14,10 @@ RUN \
     set -o pipefail \
     \
     && apk add --no-cache --virtual .build-dependencies \
-        tar=1.34-r0 \
+        tar=1.34-r2 \
     \
     && apk add --no-cache \
-        curl=7.80.0-r0 \
+        curl=8.4.0-r0 \
     \
     && curl -J -L -o /tmp/bashio.tar.gz \
         "https://github.com/hassio-addons/bashio/archive/v0.14.3.tar.gz" \
